@@ -6,7 +6,7 @@
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
     Copyright (C) 2013 OpenFOAM Foundation
-    Copyright (C) 2022 OpenCFD Ltd.
+    Copyright (C) 2022-2023 OpenCFD Ltd.
 -------------------------------------------------------------------------------
 License
     This file is part of OpenFOAM.
@@ -50,6 +50,11 @@ Description
 
             // Alternative : specify number of (equi-distributed) masters
             nMasters                2;
+
+            // Restart local agglomeration after processor agglomeration. Used
+            // as nCellsInCoarsestLevel. Only applicable for pair-wise local
+            // agglomeration methods.
+            nMasterCoarsestCells    1;
         }
 
 SourceFiles
@@ -57,8 +62,8 @@ SourceFiles
 
 \*---------------------------------------------------------------------------*/
 
-#ifndef masterCoarsestGAMGProcAgglomeration_H
-#define masterCoarsestGAMGProcAgglomeration_H
+#ifndef Foam_masterCoarsestGAMGProcAgglomeration_H
+#define Foam_masterCoarsestGAMGProcAgglomeration_H
 
 #include "GAMGProcAgglomeration.H"
 #include "DynamicList.H"
@@ -68,6 +73,7 @@ SourceFiles
 namespace Foam
 {
 
+// Forward Declarations
 class GAMGAgglomeration;
 
 /*---------------------------------------------------------------------------*\
@@ -81,6 +87,8 @@ class masterCoarsestGAMGProcAgglomeration
     // Private data
 
         label nProcessorsPerMaster_;
+
+        const label nMasterCoarsestCells_;
 
         DynamicList<label> comms_;
 
@@ -119,9 +127,8 @@ public:
 
     // Member Functions
 
-       //- Modify agglomeration. Return true if modified
+        //- Modify agglomeration. Return true if modified
         virtual bool agglomerate();
-
 };
 
 
