@@ -221,6 +221,8 @@ void LamBremhorstKE::correct()
 
     // Update epsilon and G at the wall
     epsilon_.boundaryFieldRef().updateCoeffs();
+    // Push any changed cell values to coupled neighbours
+    epsilon_.boundaryFieldRef().evaluateCoupled<coupledFvPatch>();
 
     const volScalarField Rt(this->Rt());
     const volScalarField fMu(this->fMu(Rt));

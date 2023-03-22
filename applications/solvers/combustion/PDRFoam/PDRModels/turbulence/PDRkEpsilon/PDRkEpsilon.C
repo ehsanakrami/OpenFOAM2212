@@ -132,6 +132,11 @@ void PDRkEpsilon::correct()
 
     // Update epsilon and G at the wall
     epsilon_.boundaryFieldRef().updateCoeffs();
+    // Push new cell values to
+    // coupled neighbours. Note that we want to avoid the re-updateCoeffs
+    // of the wallFunctions so make sure to bypass the evaluate on
+    // those patches and only do the coupled ones.
+    epsilon_.boundaryFieldRef().evaluateCoupled<coupledFvPatch>();
 
     // Add the blockage generation term so that it is included consistently
     // in both the k and epsilon equations

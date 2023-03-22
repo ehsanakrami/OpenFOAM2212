@@ -537,18 +537,19 @@ void kOmegaSSTBase<BasicEddyViscosityModel>::correct()
     //   (currently only coupled ones)
 
     //- 1. Explicitly swap values on coupled boundary conditions
-    //// Update omega and G at the wall
-    //omega_.boundaryFieldRef().updateCoeffs();
-    //// omegaWallFunctions change the cell value! Make sure to push these to
-    //// coupled neighbours. Note that we want to avoid the re-updateCoeffs
-    //// of the wallFunctions so make sure to bypass the evaluate on
-    //// those patches and only do the coupled ones.
-    //omega_.boundaryFieldRef().evaluateCoupled<coupledFvPatch>();
+    // Update omega and G at the wall
+    omega_.boundaryFieldRef().updateCoeffs();
+    // omegaWallFunctions change the cell value! Make sure to push these to
+    // coupled neighbours. Note that we want to avoid the re-updateCoeffs
+    // of the wallFunctions so make sure to bypass the evaluate on
+    // those patches and only do the coupled ones.
+    omega_.boundaryFieldRef().evaluateCoupled<coupledFvPatch>();
 
-    //- 2. Make sure the boundary condition calls updateCoeffs from initEvaluate
-    //     (so before any swap is done - requires all coupled bcs to be
-    //      after wall bcs)
-    omega_.correctBoundaryConditions();
+    ////- 2. Make sure the boundary condition calls updateCoeffs from
+    ////     initEvaluate
+    ////     (so before any swap is done - requires all coupled bcs to be
+    ////      after wall bcs. Unfortunately this conflicts with cyclicACMI)
+    //omega_.correctBoundaryConditions();
 
 
     const volScalarField CDkOmega
