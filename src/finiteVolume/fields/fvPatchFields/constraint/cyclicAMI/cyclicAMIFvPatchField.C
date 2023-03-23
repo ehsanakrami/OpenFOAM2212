@@ -146,6 +146,11 @@ template<class Type>
 Foam::tmp<Foam::Field<Type>>
 Foam::cyclicAMIFvPatchField<Type>::patchNeighbourField() const
 {
+    DebugPout<< "cyclicAMIFvPatchField::patchNeighbourField() :"
+        << " field:" << this->internalField().name()
+        << " patch:" << this->patch().name()
+        << endl;
+
     const Field<Type>& iField = this->primitiveField();
 
     // By pass polyPatch to get nbrId. Instead use cyclicAMIFvPatch virtual
@@ -206,6 +211,11 @@ void Foam::cyclicAMIFvPatchField<Type>::updateInterfaceMatrix
     const Pstream::commsTypes
 ) const
 {
+    DebugPout<< "cyclicAMIFvPatchField::updateInterfaceMatrix() :"
+        << " field:" << this->internalField().name()
+        << " patch:" << this->patch().name()
+        << endl;
+
     const labelUList& nbrFaceCells =
         lduAddr.patchAddr(cyclicAMIPatch_.neighbPatchID());
 
@@ -243,6 +253,11 @@ void Foam::cyclicAMIFvPatchField<Type>::updateInterfaceMatrix
     const Pstream::commsTypes
 ) const
 {
+    DebugPout<< "cyclicAMIFvPatchField::updateInterfaceMatrix() :"
+        << " field:" << this->internalField().name()
+        << " patch:" << this->patch().name()
+        << endl;
+
     const labelUList& nbrFaceCells =
         lduAddr.patchAddr(cyclicAMIPatch_.neighbPatchID());
 
