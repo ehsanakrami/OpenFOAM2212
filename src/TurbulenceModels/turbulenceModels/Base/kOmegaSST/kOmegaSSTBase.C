@@ -543,7 +543,7 @@ void kOmegaSSTBase<BasicEddyViscosityModel>::correct()
     // coupled neighbours. Note that we want to avoid the re-updateCoeffs
     // of the wallFunctions so make sure to bypass the evaluate on
     // those patches and only do the coupled ones.
-    omega_.boundaryFieldRef().evaluateCoupled<coupledFvPatch>();
+    omega_.boundaryFieldRef().template evaluateCoupled<coupledFvPatch>();
 
     ////- 2. Make sure the boundary condition calls updateCoeffs from
     ////     initEvaluate

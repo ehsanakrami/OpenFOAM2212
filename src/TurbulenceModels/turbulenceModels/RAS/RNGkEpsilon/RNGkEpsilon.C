@@ -282,7 +282,7 @@ void RNGkEpsilon<BasicTurbulenceModel>::correct()
     // Update epsilon and G at the wall
     epsilon_.boundaryFieldRef().updateCoeffs();
     // Push any changed cell values to coupled neighbours
-    epsilon_.boundaryFieldRef().evaluateCoupled<coupledFvPatch>();
+    epsilon_.boundaryFieldRef().template evaluateCoupled<coupledFvPatch>();
 
     // Dissipation equation
     tmp<fvScalarMatrix> epsEqn

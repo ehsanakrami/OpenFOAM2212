@@ -413,7 +413,7 @@ void kEpsilonPhitF<BasicTurbulenceModel>::correct()
     // Update epsilon and G at the wall
     epsilon_.boundaryFieldRef().updateCoeffs();
     // Push any changed cell values to coupled neighbours
-    epsilon_.boundaryFieldRef().evaluateCoupled<coupledFvPatch>();
+    epsilon_.boundaryFieldRef().template evaluateCoupled<coupledFvPatch>();
 
     // Turbulent kinetic energy dissipation rate equation (LUU:Eq. 4)
     // k/T ~ epsilon
