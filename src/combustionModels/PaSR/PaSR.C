@@ -99,6 +99,9 @@ void Foam::combustionModels::PaSR<ReactionThermo>::correct()
                 kappa_[i] = 1.0;
             }
         }
+
+        // Evaluate bcs
+        kappa_.correctBoundaryConditions();
     }
 }
 

@@ -143,6 +143,9 @@ void Foam::combustionModels::EDC<ReactionThermo>::correct()
                         );
                 }
             }
+
+            // Evaluate bcs
+            kappa_.correctBoundaryConditions();
         }
         else
         {
@@ -171,6 +174,9 @@ void Foam::combustionModels::EDC<ReactionThermo>::correct()
                         );
                 }
             }
+
+            // Evaluate bcs
+            kappa_.correctBoundaryConditions();
         }
 
         Info<< "Chemistry time solved max/min : "
