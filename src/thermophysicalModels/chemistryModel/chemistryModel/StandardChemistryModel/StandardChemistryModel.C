@@ -574,6 +574,7 @@ Foam::StandardChemistryModel<ReactionThermo, ThermoType>::Qdot() const
                 Qdot[celli] -= hi*RR_[i][celli];
             }
         }
+        tQdot.ref().correctBoundaryConditions();
     }
 
     return tQdot;
