@@ -65,7 +65,7 @@ Foam::masterCoarsestGAMGProcAgglomeration::masterCoarsestGAMGProcAgglomeration
     ),
     nMasterCoarsestCells_
     (
-        controlDict.getOrDefault<label>("nMasterCoarsestCells", -1)
+        controlDict.getOrDefault<label>("nCellsInMasterLevel", -1)
     )
 {
     const auto* ePtr = controlDict.findEntry("nMasters", keyType::LITERAL);
